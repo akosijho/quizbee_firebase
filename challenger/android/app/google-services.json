@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1085373890095",
+    "project_id": "quizzbee-b9a0c",
+    "storage_bucket": "quizzbee-b9a0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085373890095:android:caeddf1c3dea6de6df90da",
+        "android_client_info": {
+          "package_name": "com.example.challenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085373890095-0jbvq4s52pd1poa07vmmkc9l182pkktr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5pTJ1EUQal3X7ZqyeFAt_yivBfj-cyos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085373890095-0jbvq4s52pd1poa07vmmkc9l182pkktr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
