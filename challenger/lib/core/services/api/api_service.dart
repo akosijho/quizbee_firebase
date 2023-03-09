@@ -8,7 +8,7 @@ abstract class ApiService{
   Future<Player?> register(String name);
 
   //  get player points
-  Future<int?> playerPoints(String id);
+  Future<void> playerPoints(String id, int score);
 
   //getquestion
   Future<Question> getQuestion();

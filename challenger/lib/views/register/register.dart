@@ -62,12 +62,11 @@ class Register extends StatelessWidget {
                             },
                             child: Center(
                               child:
-                              // model.isBusy
-                              //     ? const CircularProgressIndicator(
-                              //   color: Colors.white,
-                              // )
-                              //     :
-                              Text(
+                              model.isBusy
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )
+                                    : Text(
                                 "Proceed",
                                 style: Theme.of(context)
                                     .textTheme

@@ -10,9 +10,8 @@ import 'api_service.dart';
 
 @LazySingleton(as: ApiService)
 class ApiServiceImpl implements ApiService {
-
   final shared = locator<SharedPreference>();
-  
+
   @override
   Future<void> checkAnswer(String answer, String id) {
     // TODO: implement checkAnswer
@@ -27,13 +26,21 @@ class ApiServiceImpl implements ApiService {
 
   @override
   Future<Question> getQuestion() async {
-    try{
-      final QuerySnapshot<Map<String, dynamic>> questionQuery = await questionRef.where('status', isEqualTo: '1').limit(1).get();
-      final q = questionQuery.docs.map((question) => Question.fromSnapshot(question));
-      final QuerySnapshot<Map<String, dynamic>> choicesQuery = await questionRef.doc(q.first.id).collection('choices').get();
+    try {
+      final QuerySnapshot<Map<String, dynamic>> questionQuery =
+          await questionRef.where('status', isEqualTo: '1').limit(1).get();
+      final q =
+          questionQuery.docs.map((question) => Question.fromSnapshot(question));
+      final QuerySnapshot<Map<String, dynamic>> choicesQuery =
+          await questionRef.doc(q.first.id).collection('choices').get();
       final c = choicesQuery.docs.map((e) => Option.fromSnapshot(e)).toList();
-      return Question(id: q.first.id, question: q.first.question, status: q.first.status, choices: c.toList());
-    }catch(e){
+      return Question(
+          id: q.first.id,
+          question: q.first.question,
+          status: q.first.status,
+          choices: c.toList(),
+          answer: q.first.answer);
+    } catch (e) {
       rethrow;
     }
   }
@@ -45,22 +52,28 @@ class ApiServiceImpl implements ApiService {
   }
 
   @override
-  Future<int?> playerPoints(String id) {
-    // TODO: implement playerPoints
-    throw UnimplementedError();
+  Future<void> playerPoints(String id, int score) async {
+    try {
+      participantRef.doc(id).set({'score': score}, SetOptions(merge: true));
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<Player?> register(String name) async {
     var player = Player(name: name, score: 0);
-    try{
+    try {
       participantRef.doc().set(player.toJson());
-      QuerySnapshot snapshot = await participantRef.where('name', isEqualTo: name).get();
-      participantRef.doc(snapshot.docs.first.id).set({'id': snapshot.docs.first.id}, SetOptions(merge: true));
+      QuerySnapshot snapshot =
+          await participantRef.where('name', isEqualTo: name).get();
+      participantRef
+          .doc(snapshot.docs.first.id)
+          .set({'id': snapshot.docs.first.id}, SetOptions(merge: true));
       player = Player(id: snapshot.docs.first.id, name: name);
       shared.setUser(player);
       return player;
-    }catch(e){
+    } catch (e) {
       rethrow;
     }
   }
@@ -70,5 +83,4 @@ class ApiServiceImpl implements ApiService {
     // TODO: implement start
     throw UnimplementedError();
   }
-
 }
