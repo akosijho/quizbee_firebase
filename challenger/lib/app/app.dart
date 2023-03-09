@@ -1,5 +1,6 @@
 
-import 'package:game_challenger/views/register.dart';
+import 'package:game_challenger/views/challenge/challenge.dart';
+import 'package:game_challenger/views/register/register.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -12,11 +13,11 @@ import '../core/services/shared/shared_preference_impl.dart';
 import 'app_view_model.dart';
 
 @StackedApp(routes: [
-  // CustomRoute(
-  //     page: Challenge,
-  //     name: "challenge",
-  //     transitionsBuilder: TransitionsBuilders.slideLeft,
-  //     durationInMilliseconds: 250),
+  CustomRoute(
+      page: Challenge,
+      name: "challenge",
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+      durationInMilliseconds: 250),
   //
   // CustomRoute(
   //   page: NewChallenge,
