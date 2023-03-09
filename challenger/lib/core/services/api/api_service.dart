@@ -11,7 +11,7 @@ abstract class ApiService{
   Future<int?> playerPoints(String id);
 
   //getquestion
-  Future<List<Question>?> getQuestion();
+  Future<Question> getQuestion();
 
   //  answer checking
   Future<void> checkAnswer(String answer, String id);

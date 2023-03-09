@@ -6,3 +6,4 @@ const BASE_URL = "http://quizzbee.bisubilar.org/api";
 FirebaseFirestore db = FirebaseFirestore.instance;
 
 final participantRef = db.collection('paticipants');
+final questionRef = db.collection('questions');
