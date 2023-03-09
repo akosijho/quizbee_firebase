@@ -1,4 +1,6 @@
 
+import 'package:game_challenger/views/register.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 import '../core/services/api/api_service.dart';
@@ -32,12 +34,12 @@ import 'app_view_model.dart';
   //     name: "finish",
   //     transitionsBuilder: TransitionsBuilders.slideLeft,
   //     durationInMilliseconds: 250),
-  // CustomRoute(
-  //     page: Register,
-  //     name: "register",
-  //     transitionsBuilder: TransitionsBuilders.zoomIn,
-  //     durationInMilliseconds: 250,
-  //     initial: true),
+  CustomRoute(
+      page: Register,
+      name: "register",
+      transitionsBuilder: TransitionsBuilders.zoomIn,
+      durationInMilliseconds: 250,
+      initial: true),
 ], dependencies: [
   LazySingleton(classType: AppViewModel, asType: AppViewModel),
   LazySingleton(classType: NavigationServiceImpl, asType: NavigationService),

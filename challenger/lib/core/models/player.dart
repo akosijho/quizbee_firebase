@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Player extends Equatable {
-  final int? id;
+  final String? id;
   final String? name;
   final int? score;
 
@@ -12,7 +12,7 @@ class Player extends Equatable {
 
   factory Player.fromJson(Map<String, dynamic> json) {
     return Player(
-      id: json['id'] as int?,
+      id: json['id'] as String?,
       name: json['name'] as String?,
       score: json['score'] as int?,
     );
