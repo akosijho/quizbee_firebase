@@ -1,5 +1,6 @@
 
 import 'package:game_challenger/views/challenge/challenge.dart';
+import 'package:game_challenger/views/next/next_challenge.dart';
 import 'package:game_challenger/views/register/register.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -18,12 +19,12 @@ import 'app_view_model.dart';
       name: "challenge",
       transitionsBuilder: TransitionsBuilders.slideLeft,
       durationInMilliseconds: 250),
-  //
-  // CustomRoute(
-  //   page: NewChallenge,
-  //   name: "new_challenge",
-  //   transitionsBuilder: TransitionsBuilders.slideLeft,
-  //     durationInMilliseconds: 250),
+
+  CustomRoute(
+    page: NextChallenge,
+    name: "new_challenge",
+    transitionsBuilder: TransitionsBuilders.slideLeft,
+      durationInMilliseconds: 250),
   //
   // CustomRoute(
   //   page: Waitng,

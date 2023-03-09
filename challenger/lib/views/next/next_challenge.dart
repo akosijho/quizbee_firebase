@@ -1,15 +1,17 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:game_challenger/core/models/challenge.dart';
 import 'package:game_challenger/core/models/player.dart';
-import 'package:game_challenger/views/challenge/challenge_view_model.dart';
-import 'package:game_challenger/views/challenge/components/choice_builder.dart';
+import 'package:game_challenger/views/next/components/choice_builder.dart';
+import 'package:game_challenger/views/next/next_challenge_view_model.dart';
 import 'package:game_challenger/widgets/build_body.dart';
 import 'package:game_challenger/widgets/height_gap.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 
-class Challenge extends StatelessWidget {
-  const Challenge({required this.player, required this.question, Key? key})
+class NextChallenge extends StatelessWidget {
+  const NextChallenge({required this.player, required this.question, Key? key})
       : super(key: key);
 
   final Player player;
@@ -17,9 +19,9 @@ class Challenge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<ChallengeViewModel>.reactive(
+    return ViewModelBuilder<NextChallengeViewModel>.reactive(
         viewModelBuilder: () =>
-            ChallengeViewModel(currentQuestion: question, player: player),
+            NextChallengeViewModel(currentQuestion: question, player: player),
         onViewModelReady: (model) => model.init(),
         onDispose: (model) => model.timer,
         builder: (context, model, child) {

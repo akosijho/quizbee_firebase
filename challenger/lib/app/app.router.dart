@@ -5,24 +5,28 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
 import 'package:flutter/material.dart';
-import 'package:game_challenger/core/models/challenge.dart' as _i6;
-import 'package:game_challenger/core/models/player.dart' as _i5;
+import 'package:game_challenger/core/models/challenge.dart' as _i7;
+import 'package:game_challenger/core/models/player.dart' as _i6;
 import 'package:game_challenger/views/challenge/challenge.dart' as _i2;
-import 'package:game_challenger/views/register/register.dart' as _i3;
+import 'package:game_challenger/views/next/next_challenge.dart' as _i3;
+import 'package:game_challenger/views/register/register.dart' as _i4;
 import 'package:stacked/src/code_generation/router_annotation/transitions_builders.dart'
-    as _i4;
+    as _i5;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i8;
+import 'package:stacked_services/stacked_services.dart' as _i9;
 
 class Routes {
   static const challenge = '/Challenge';
+
+  static const new_challenge = '/next-challenge';
 
   static const register = '/';
 
   static const all = <String>{
     challenge,
+    new_challenge,
     register,
   };
 }
@@ -34,8 +38,12 @@ class StackedRouter extends _i1.RouterBase {
       page: _i2.Challenge,
     ),
     _i1.RouteDef(
+      Routes.new_challenge,
+      page: _i3.NextChallenge,
+    ),
+    _i1.RouteDef(
       Routes.register,
-      page: _i3.Register,
+      page: _i4.Register,
     ),
   ];
 
@@ -47,16 +55,28 @@ class StackedRouter extends _i1.RouterBase {
             player: args.player, question: args.question, key: args.key),
         settings: data,
         transitionsBuilder:
-            data.transition ?? _i4.TransitionsBuilders.slideLeft,
+            data.transition ?? _i5.TransitionsBuilders.slideLeft,
         transitionDuration: const Duration(milliseconds: 250),
       );
     },
-    _i3.Register: (data) {
+    _i3.NextChallenge: (data) {
+      final args = data.getArgs<NextChallengeArguments>(nullOk: false);
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const _i3.Register(),
+            _i3.NextChallenge(
+                player: args.player, question: args.question, key: args.key),
         settings: data,
-        transitionsBuilder: data.transition ?? _i4.TransitionsBuilders.zoomIn,
+        transitionsBuilder:
+            data.transition ?? _i5.TransitionsBuilders.slideLeft,
+        transitionDuration: const Duration(milliseconds: 250),
+      );
+    },
+    _i4.Register: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const _i4.Register(),
+        settings: data,
+        transitionsBuilder: data.transition ?? _i5.TransitionsBuilders.zoomIn,
         transitionDuration: const Duration(milliseconds: 250),
       );
     },
@@ -75,11 +95,11 @@ class ChallengeArguments {
     this.key,
   });
 
-  final _i5.Player player;
+  final _i6.Player player;
 
-  final _i6.Question question;
+  final _i7.Question question;
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   @override
   String toString() {
@@ -87,11 +107,30 @@ class ChallengeArguments {
   }
 }
 
-extension NavigatorStateExtension on _i8.NavigationService {
+class NextChallengeArguments {
+  const NextChallengeArguments({
+    required this.player,
+    required this.question,
+    this.key,
+  });
+
+  final _i6.Player player;
+
+  final _i7.Question question;
+
+  final _i8.Key? key;
+
+  @override
+  String toString() {
+    return '{"player": "$player", "question": "$question", "key": "$key"}';
+  }
+}
+
+extension NavigatorStateExtension on _i9.NavigationService {
   Future<dynamic> navigateToChallenge({
-    required _i5.Player player,
-    required _i6.Question question,
-    _i7.Key? key,
+    required _i6.Player player,
+    required _i7.Question question,
+    _i8.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -101,6 +140,25 @@ extension NavigatorStateExtension on _i8.NavigationService {
     return navigateTo<dynamic>(Routes.challenge,
         arguments:
             ChallengeArguments(player: player, question: question, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNew_challenge({
+    required _i6.Player player,
+    required _i7.Question question,
+    _i8.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.new_challenge,
+        arguments: NextChallengeArguments(
+            player: player, question: question, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -122,9 +180,9 @@ extension NavigatorStateExtension on _i8.NavigationService {
   }
 
   Future<dynamic> replaceWithChallenge({
-    required _i5.Player player,
-    required _i6.Question question,
-    _i7.Key? key,
+    required _i6.Player player,
+    required _i7.Question question,
+    _i8.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -134,6 +192,25 @@ extension NavigatorStateExtension on _i8.NavigationService {
     return replaceWith<dynamic>(Routes.challenge,
         arguments:
             ChallengeArguments(player: player, question: question, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithNew_challenge({
+    required _i6.Player player,
+    required _i7.Question question,
+    _i8.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.new_challenge,
+        arguments: NextChallengeArguments(
+            player: player, question: question, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

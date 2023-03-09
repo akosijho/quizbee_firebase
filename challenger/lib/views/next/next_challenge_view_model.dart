@@ -1,15 +1,14 @@
 import 'dart:async';
 
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:game_challenger/app/app.router.dart';
 import 'package:game_challenger/app/app_view_model.dart';
 import 'package:game_challenger/core/models/challenge.dart';
 import 'package:game_challenger/core/models/player.dart';
 import 'package:game_challenger/utils/constants.dart';
 import 'package:game_challenger/widgets/snackbar.dart';
-import 'package:get/get.dart';
 
-class ChallengeViewModel extends AppViewModel {
+class NextChallengeViewModel extends AppViewModel {
   bool isLocked = false;
   int? index;
   bool correct = false;
@@ -17,19 +16,19 @@ class ChallengeViewModel extends AppViewModel {
   Player player;
   Question? nextQuestion;
 
-  ChallengeViewModel({required this.currentQuestion, required this.player});
+  NextChallengeViewModel({required this.currentQuestion, required this.player});
 
   Timer? timer;
 
   void init() async {
-    timer = Timer.periodic(const Duration(milliseconds: 100), (timer) async {
+    timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
       getNext();
       if (nextQuestion != null) {
         if (currentQuestion != nextQuestion) {
           timer!.cancel();
           await nav.pushReplacementNamed(Routes.new_challenge,
-              arguments: NextChallengeArguments(
-                  player: player, question: nextQuestion!));
+              arguments:
+                  ChallengeArguments(player: player, question: nextQuestion!));
         }
       }
     });
